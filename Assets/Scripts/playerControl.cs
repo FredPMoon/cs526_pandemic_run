@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class playerControl : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //tag - 1/2/3 对应跑道位置
+    //tag - positive 在player触碰后游戏结束
     public float moveSpeed =10f;
     public GameObject failure;
+    public GameObject camera;
     void Start()
     {
         
@@ -31,18 +33,20 @@ public class playerControl : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("do");
         if(collider.gameObject.tag.Equals("1")||collider.gameObject.tag.Equals("2")||collider.gameObject.tag.Equals("3")){
-            //Debug.Log("2");
-            //failure.SetActive(true);
             Destroy(collider.gameObject);
         }
         if(collider.gameObject.tag.Equals("positive")){
-            //Debug.Log("2");
             failure.SetActive(true);
             Destroy(collider.gameObject);
+            stop();
         }
         //Debug.Log(collider.gameObject.tag);
         
+    }
+
+    public void stop(){
+        follow other = (follow)camera.GetComponent(typeof(follow));
+        other.stop();
     }
 }

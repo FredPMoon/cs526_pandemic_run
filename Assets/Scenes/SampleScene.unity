@@ -581,7 +581,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 909530501}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 987496290}
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &909530501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -840,6 +851,7 @@ GameObject:
   - component: {fileID: 987496289}
   - component: {fileID: 987496288}
   - component: {fileID: 987496287}
+  - component: {fileID: 987496290}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -895,6 +907,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &987496290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987496286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1052b157d8315eb4eb422dc611316da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1003749183
 Mesh:
   m_ObjectHideFlags: 0
@@ -2103,5 +2127,10 @@ PrefabInstance:
       propertyPath: failure
       value: 
       objectReference: {fileID: 1899054944}
+    - target: {fileID: 6813145770978336354, guid: 684009544919d3e449d790dad48c2435,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 963194225}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 684009544919d3e449d790dad48c2435, type: 3}
