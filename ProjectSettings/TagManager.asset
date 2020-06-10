@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - player
+  - path1
+  - path2
+  - path3
+  - positive
+  - negative
+  - 1
+  - 2
+  - 3
   layers:
   - Default
   - TransparentFX

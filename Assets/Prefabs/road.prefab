@@ -102,7 +102,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -114,7 +113,6 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -207,6 +205,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: path1
       objectReference: {fileID: 0}
+    - target: {fileID: 6138935098726076134, guid: ea16b29f2d154274a9683707296db2b5,
+        type: 3}
+      propertyPath: m_TagString
+      value: path1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea16b29f2d154274a9683707296db2b5, type: 3}
 --- !u!4 &7585309822261848762 stripped
@@ -282,6 +285,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: path2
       objectReference: {fileID: 0}
+    - target: {fileID: 6138935098726076134, guid: ea16b29f2d154274a9683707296db2b5,
+        type: 3}
+      propertyPath: m_TagString
+      value: path2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea16b29f2d154274a9683707296db2b5, type: 3}
 --- !u!4 &7585309822064515467 stripped
@@ -355,6 +363,11 @@ PrefabInstance:
     - target: {fileID: 6138935098726076134, guid: ea16b29f2d154274a9683707296db2b5,
         type: 3}
       propertyPath: m_Name
+      value: path3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138935098726076134, guid: ea16b29f2d154274a9683707296db2b5,
+        type: 3}
+      propertyPath: m_TagString
       value: path3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
