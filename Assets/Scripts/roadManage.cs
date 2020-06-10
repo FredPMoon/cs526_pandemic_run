@@ -13,6 +13,9 @@ public class roadManage : MonoBehaviour
     //private int infection_2 = 0;
     //private int infection_3 = 0;
     public Text distance;
+    public Text infection_1;
+    public Text infection_2;
+    public Text infection_3;
     private string roadColor;
     private int roadCount = 3;      //生成的第几个路径用于确定位置
  
@@ -32,6 +35,13 @@ public class roadManage : MonoBehaviour
     void Update()
     {
         RoadPainting();
+        GameObject[] patients = GameObject.FindGameObjectsWithTag("positive");
+        foreach(GameObject patient in patients){
+            patient.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        }
+        infection_1.text = "infection1: "+PlayerPrefs.GetInt("infection_1");
+        infection_2.text = "infection2: "+PlayerPrefs.GetInt("infection_2");
+        infection_3.text = "infection3: "+PlayerPrefs.GetInt("infection_3");
     }
 
     public void RoadPainting(){
@@ -39,11 +49,6 @@ public class roadManage : MonoBehaviour
         foreach(GameObject path in paths_1){
             path.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }
-        // GameObject[] obstacles = GameObject.FindGameObjectsWithTag("1");
-        // foreach(GameObject obstacle in obstacles){
-        //     obstacle.tag = "positive";
-        //     obstacle.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        // }
         GameObject[] paths_2 = GameObject.FindGameObjectsWithTag("path2");
         foreach(GameObject path in paths_2){
             path.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
