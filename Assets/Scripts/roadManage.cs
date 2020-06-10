@@ -31,7 +31,7 @@ public class roadManage : MonoBehaviour
         _instance = this;
         PlayerPrefs.SetInt("infection_1", 0);
         PlayerPrefs.SetInt("infection_2", 0);
-        PlayerPrefs.SetInt("Infection_3", 0);
+        PlayerPrefs.SetInt("infection_3", 0);
     }
 
     // Update is called once per frame
