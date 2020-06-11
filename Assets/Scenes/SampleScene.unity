@@ -1081,6 +1081,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1054495810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6061030823513202236, guid: bde133cf7b030fc4191fed0a92d827c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6061030823920323173}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1092667280
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,6 +2316,16 @@ PrefabInstance:
       propertyPath: score
       value: 
       objectReference: {fileID: 1224359704}
+    - target: {fileID: 6813145770978336354, guid: 684009544919d3e449d790dad48c2435,
+        type: 3}
+      propertyPath: main_camera
+      value: 
+      objectReference: {fileID: 963194225}
+    - target: {fileID: 6813145770978336354, guid: 684009544919d3e449d790dad48c2435,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1054495810}
     - target: {fileID: 8393469449272765229, guid: 684009544919d3e449d790dad48c2435,
         type: 3}
       propertyPath: m_IsActive

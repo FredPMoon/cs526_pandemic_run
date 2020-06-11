@@ -9,9 +9,11 @@ public class playerControl : MonoBehaviour
     //tag - positive 在player触碰后游戏结束
     public float moveSpeed =10f;
     public GameObject failure;
-    public GameObject camera;
+    public GameObject main_camera;
     private int scoreNum = 0;
     public Text score;
+    public GameObject canvas;
+    int[] constraint_x = {-3, 3};
     void Start()
     {
         
@@ -20,17 +22,23 @@ public class playerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow)&&transform.position.z<(main_camera.transform.position.z+20))
             transform.Translate(Vector3.forward * moveSpeed*Time.deltaTime);
  
         if (Input.GetKey(KeyCode.DownArrow))
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
  
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow)&&transform.position.x>-3)
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
  
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)&&transform.position.x<3)
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        
+        if(transform.position.z<main_camera.transform.position.z){
+            canvas.SetActive(false);
+            failure.SetActive(true);
+            stop();
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -51,7 +59,7 @@ public class playerControl : MonoBehaviour
     }
 
     public void stop(){
-        follow other = (follow)camera.GetComponent(typeof(follow));
+        follow other = (follow)main_camera.GetComponent(typeof(follow));
         other.stop();
     }
 }
