@@ -10,6 +10,8 @@ public class playerControl : MonoBehaviour
     public float moveSpeed =10f;
     public GameObject failure;
     public GameObject camera;
+    private int scoreNum = 0;
+    public Text score;
     void Start()
     {
         
@@ -34,7 +36,10 @@ public class playerControl : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         if(collider.gameObject.tag.Equals("1")||collider.gameObject.tag.Equals("2")||collider.gameObject.tag.Equals("3")){
+            scoreNum += 1;
+            score.text = "Score: " + scoreNum;
             Destroy(collider.gameObject);
+            //PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score")+1);
         }
         if(collider.gameObject.tag.Equals("positive")){
             failure.SetActive(true);
