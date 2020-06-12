@@ -30,9 +30,11 @@ public class playerControl : MonoBehaviour
  
         if (Input.GetKey(KeyCode.LeftArrow)&&transform.position.x>-3)
             transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+            //transform.Translate(Vector3.left * moveSpeed * 0.1f);
  
         if (Input.GetKey(KeyCode.RightArrow)&&transform.position.x<3)
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+            //transform.Translate(Vector3.right * moveSpeed * 0.1f);
         
         if(transform.position.z<main_camera.transform.position.z){
             canvas.SetActive(false);
