@@ -16,6 +16,17 @@ public class playerControl : MonoBehaviour
     public GameObject canvas;
     int[] constraint_x = {-3, 3};
 
+	public GameObject recipe_1;
+    public GameObject recipe_2;
+    public GameObject recipe_3;
+    private string menu_1;
+    private string menu_2;
+    private string menu_3;
+
+    string[] recipes00 = {"aacx", "bbax", "abbx", "abbx"};
+    string[] recipes01 = {"abcy", "bacy", "caby", "acby"};
+    string[] recipes02 = {"bbcaz", "cbaaz", "aacbz", "bccaz"};
+
 	public SwipeBehavior swipeBehavior;
 	public bool keyPressed = false;
 	public float midLanePositionX;
@@ -27,6 +38,9 @@ public class playerControl : MonoBehaviour
 
     void Start()
     {
+		menu_1 = recipes00[0];
+        menu_2 = recipes01[0];
+        menu_3 = recipes02[0];
         // swipeBehavior = FindObjectOfType<SwipeBehavior>();
 		midLanePositionX = transform.position.x;
 		leftLanePositionX = midLanePositionX - 1 * 140f * Time.deltaTime;
@@ -34,21 +48,6 @@ public class playerControl : MonoBehaviour
 		groundPositionY = transform.position.y;
 		airPositionY = groundPositionY + 80f * Time.deltaTime;
 		jumpFrames = 0;
-    public GameObject recipe_1;
-    public GameObject recipe_2;
-    public GameObject recipe_3;
-    private string menu_1;
-    private string menu_2;
-    private string menu_3;
-
-    string[] recipes00 = {"aacx", "bbax", "abbx", "abbx"};
-    string[] recipes01 = {"abcy", "bacy", "caby", "acby"};
-    string[] recipes02 = {"bbcaz", "cbaaz", "aacbz", "bccaz"};
-    void Start()
-    {
-        menu_1 = recipes00[0];
-        menu_2 = recipes01[0];
-        menu_3 = recipes02[0];
     }
 
     // Update is called once per frame
