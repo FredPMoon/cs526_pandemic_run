@@ -48,6 +48,13 @@ public class roadManage : MonoBehaviour
         infection_1.text = "infection1: "+PlayerPrefs.GetInt("infection_1");
         infection_2.text = "infection2: "+PlayerPrefs.GetInt("infection_2");
         infection_3.text = "infection3: "+PlayerPrefs.GetInt("infection_3");
+        if(roadCount>=90){
+            PlayerPrefs.SetInt("difficulty", 2);
+        }else if(roadCount>=60){
+            PlayerPrefs.SetInt("difficulty", 1);
+        }else{
+            PlayerPrefs.SetInt("difficulty", 0);
+        }
     }
 
     public void RoadPainting(){

@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   failure: {fileID: 0}
+  main_camera: {fileID: 0}
+  score: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!65 &4518315988313196717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132,7 +135,7 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -223,7 +226,7 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
