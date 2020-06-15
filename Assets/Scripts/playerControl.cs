@@ -10,15 +10,22 @@ public class playerControl : MonoBehaviour
     public GameObject main_camera;
     private int scoreNum = 0;
     public Text score;
-    public string package;
+    public Text collection;
+    private string package;
     public GameObject canvas;
     int[] constraint_x = {-3, 3};
-    public GameObject recipe_1;
-    public GameObject recipe_2;
-    public GameObject recipe_3;
+    public Text recipe_1;
+    public Text recipe_2;
+    public Text recipe_3;
     private string menu_1;
     private string menu_2;
     private string menu_3;
+
+    public GameObject frame00; public GameObject frame01; public GameObject frame02; public GameObject frame03; public GameObject frame04;
+    public GameObject frame10; public GameObject frame11; public GameObject frame12; public GameObject frame13; public GameObject frame14;
+    public GameObject frame20; public GameObject frame21; public GameObject frame22; public GameObject frame23; public GameObject frame24;
+
+    public List<GameObject> frames = new List<GameObject>();
 
     string[] recipes00 = {"aacx", "bbax", "abbx", "abbx"};
     string[] recipes01 = {"abcy", "bacy", "caby", "acby"};
@@ -28,6 +35,28 @@ public class playerControl : MonoBehaviour
         menu_1 = recipes00[0];
         menu_2 = recipes01[0];
         menu_3 = recipes02[0];
+        recipe_1.text = format(menu_1);
+        recipe_2.text = format(menu_2);
+        recipe_3.text = format(menu_3);
+        frame00.SetActive(true);
+        frame10.SetActive(true);
+        frame20.SetActive(true);
+        frames.Add(frame00);
+        frames.Add(frame01);
+        frames.Add(frame02);
+        frames.Add(frame03);
+        frames.Add(frame04);
+        frames.Add(frame10);
+        frames.Add(frame11);
+        frames.Add(frame12);
+        frames.Add(frame13);
+        frames.Add(frame14);
+        frames.Add(frame20);
+        frames.Add(frame21);
+        frames.Add(frame22);
+        frames.Add(frame23);
+        frames.Add(frame24);
+
     }
 
     // Update is called once per frame
@@ -52,24 +81,25 @@ public class playerControl : MonoBehaviour
             failure.SetActive(true);
             stop();
         }
+
     }
 
     void OnTriggerEnter(Collider collider)
     {
+        string tag = collider.gameObject.tag;
         // if(collider.gameObject.tag.Equals("1")||collider.gameObject.tag.Equals("2")||collider.gameObject.tag.Equals("3")){
         //     scoreNum += 1;
         //     score.text = "Score: " + scoreNum;
         //     Destroy(collider.gameObject);
         //     //PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score")+1);
         // }
-        string ingredient = collider.gameObject.tag;
-        // switch(ingredient){
-        //     case "a": break;
-        //     case "b": break;
-        //     case "c": break;
-        //     case "d": break;
-        //     case "e": break;
-        // }
+        if(tag.Equals("a")||tag.Equals("b")||tag.Equals("c")||tag.Equals("d")||tag.Equals("e")){
+            package = package + tag;
+            package = compare(package, menu_1, menu_2, menu_3);
+            collection.text = package;
+            Destroy(collider.gameObject);
+            recipeCheck(package);
+        }
         if(collider.gameObject.tag.Equals("positive")){
             failure.SetActive(true);
             Destroy(collider.gameObject);
@@ -84,9 +114,43 @@ public class playerControl : MonoBehaviour
         other.stop();
     }
 
-    void recipeCheck()
+    //实现配方提示
+    void recipeCheck(string collected)
     {
-        int old = package.Length;
+      int l = collected.Length;
+      if(l==0){
+          frames[menu_1.Length-2].SetActive(false);
+          frame00.SetActive(true);
+          frames[menu_2.Length+3].SetActive(false);
+          frame10.SetActive(true);
+          frames[menu_3.Length+8].SetActive(false);
+          frame20.SetActive(true);
+      }else{
+          if(collected.Equals(menu_1.Substring(0, l))){
+              frames[l].SetActive(true);
+              frames[l-1].SetActive(false);
+          }else{
+              for(int i = 0; i < 5; i++){
+                  frames[i].SetActive(false);
+              }
+          }
+          if(collected.Equals(menu_2.Substring(0, l))){
+            frames[l+5].SetActive(true);
+            frames[l+4].SetActive(false);
+          }else{
+              for(int i = 5; i < 10; i++){
+                  frames[i].SetActive(false);
+              }
+          }
+          if(collected.Equals(menu_3.Substring(0, l))){
+            frames[l+10].SetActive(true);
+            frames[l+9].SetActive(false);
+          }else{
+              for(int i = 10; i < 15; i++){
+                  frames[i].SetActive(false);
+              }
+          }
+      } 
 
     }
 
@@ -119,34 +183,34 @@ public class playerControl : MonoBehaviour
         string subRecipe3 = recipe3.Substring(0, length);
         if(collected.Equals(subRecipe1)){
             if(length == recipe1.Length - 1){
-            switch(recipe1[recipe1.Length-1]){
-                case 'x': powerUp_x(); updateRecipe(); return "";
-                case 'y': powerUp_y(); updateRecipe(); return "";
-                case 'z': powerUp_z(); updateRecipe(); return "";
+                switch(recipe1[recipe1.Length-1]){
+                    case 'x': powerUp_x(); updateRecipe(); return "";
+                    case 'y': powerUp_y(); updateRecipe(); return "";
+                    case 'z': powerUp_z(); updateRecipe(); return "";
 
-            }
+                }
             }else if (length < recipe1.Length - 1){
                 return collected;
             }
         }else if(collected.Equals(subRecipe2)){
             if(length == recipe2.Length - 1){
-            switch(recipe2[recipe2.Length-1]){
-                case 'x': powerUp_x(); updateRecipe(); return "";
-                case 'y': powerUp_y(); updateRecipe(); return "";
-                case 'z': powerUp_z(); updateRecipe(); return "";
+                switch(recipe2[recipe2.Length-1]){
+                    case 'x': powerUp_x(); updateRecipe(); return "";
+                    case 'y': powerUp_y(); updateRecipe(); return "";
+                    case 'z': powerUp_z(); updateRecipe(); return "";
 
-            }
+                }
             }else if (length < recipe2.Length - 1){
                 return collected;
             }
         }else if(collected.Equals(subRecipe3)){
             if(length == recipe3.Length - 1){
-            switch(recipe3[recipe3.Length-1]){
-                case 'x': powerUp_x(); updateRecipe(); return "";
-                case 'y': powerUp_y(); updateRecipe(); return "";
-                case 'z': powerUp_z(); updateRecipe(); return "";
+                switch(recipe3[recipe3.Length-1]){
+                    case 'x': powerUp_x(); updateRecipe(); return "";
+                    case 'y': powerUp_y(); updateRecipe(); return "";
+                    case 'z': powerUp_z(); updateRecipe(); return "";
 
-            }
+                }
             }else if (length < recipe3.Length - 1){
                 return collected;
             }
@@ -157,7 +221,13 @@ public class playerControl : MonoBehaviour
         return "";
     }
 
-
+    string format(string str){
+        string newStr = "";
+        foreach(char c in str.Substring(0, str.Length-2)){
+            newStr = newStr + c + " - ";
+        }
+        return (newStr+str[str.Length - 2]).ToUpper();
+    }
     void updateRecipe()
     {
 

@@ -10,9 +10,6 @@ public class roadManage : MonoBehaviour
     public road road3;
     public road road4;
     public Text distance;
-    public Text infection_1;
-    public Text infection_2;
-    public Text infection_3;
     private string roadColor;
     private int roadCount = 3;      //生成的第几个路径用于确定位置
     public List<GameObject> roads = new List<GameObject>();
@@ -45,9 +42,6 @@ public class roadManage : MonoBehaviour
         foreach(GameObject patient in patients){
             patient.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }
-        infection_1.text = "infection1: "+PlayerPrefs.GetInt("infection_1");
-        infection_2.text = "infection2: "+PlayerPrefs.GetInt("infection_2");
-        infection_3.text = "infection3: "+PlayerPrefs.GetInt("infection_3");
         if(roadCount>=90){
             PlayerPrefs.SetInt("difficulty", 2);
         }else if(roadCount>=60){
