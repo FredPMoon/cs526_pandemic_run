@@ -22,6 +22,7 @@ public class playerControl : MonoBehaviour
     private string menu_1;
     private string menu_2;
     private string menu_3;
+    
 
     public GameObject frame00; public GameObject frame01; public GameObject frame02; public GameObject frame03; public GameObject frame04;
     public GameObject frame10; public GameObject frame11; public GameObject frame12; public GameObject frame13; public GameObject frame14;
@@ -41,6 +42,7 @@ public class playerControl : MonoBehaviour
 	public float groundPositionY;
 	public float airPositionY;
 	public int jumpFrames;
+    public bool shakeTF = false;
 
     void Start()
     {
@@ -163,6 +165,10 @@ public class playerControl : MonoBehaviour
             stop();
         }
 
+        if (shakeTF == true){
+        StartCoroutine(Shake(0.5f, 0.075f));
+        shakeTF = false;
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -238,12 +244,14 @@ public class playerControl : MonoBehaviour
      void powerUp_x()
     {
         //实现屏幕震动
+        shakeTF = true;
         //adding health
         Debug.Log("X");
     }
 
     void powerUp_y()
     {
+        shakeTF = true;
         //slow the camera move speed
         Debug.Log("Y");
     }
@@ -313,4 +321,19 @@ public class playerControl : MonoBehaviour
     {
 
     }
+    public IEnumerator Shake(float duration, float magnitude)
+    {
+        Vector3 orignalPosition = main_camera.transform.position;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+            main_camera.transform.position = new Vector3(x, y+main_camera.transform.position.y, main_camera.transform.position.z);
+            elapsed += Time.deltaTime;
+            yield return 0;
+        }
+        main_camera.transform.position = orignalPosition;
+    }
+
 }
