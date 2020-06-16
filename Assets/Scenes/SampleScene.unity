@@ -763,8 +763,8 @@ MonoBehaviour:
   distance: {fileID: 2041985139}
   roads: []
   road: {fileID: 2852916542392172467, guid: 125f6a72e1e47624ea051d09d8b54067, type: 3}
-  r1: {fileID: 0}
-  r2: {fileID: 0}
+  r1: {fileID: 5753484538296951237, guid: d19ef4223476f254eba6fe5463346206, type: 3}
+  r2: {fileID: 4028924486563328184, guid: 8e8915723a907094a93ad5d5ca6e63d4, type: 3}
 --- !u!54 &963194230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1725,23 +1725,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6813145771212689434}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5971154437623237542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5971154437623237541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d5a24b6a42747048a1a0b7f6915f622, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Obstacles:
-  - {fileID: 4523202009402723030, guid: ba72a1d6b3d172047b1cbc602e351eb1, type: 3}
-  - {fileID: 1000011038145264, guid: 45c7dddf851acbb4e94a8fc0ead66eed, type: 3}
-  - {fileID: 1000011262040222, guid: 196fe542ad163b149adf1ca04c19c753, type: 3}
-  - {fileID: 1000011395917184, guid: 630adda25e718324a80512d3e4d69e13, type: 3}
 --- !u!1001 &6813145771212689434
 PrefabInstance:
   m_ObjectHideFlags: 0
