@@ -42,6 +42,11 @@ public class roadManage : MonoBehaviour
         foreach(GameObject patient in patients){
             patient.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
         }
+        // GameObject[] patients = GameObject.FindGameObjectsWithTag("p");
+        // foreach(GameObject patient in patients){
+        //     GameObject c = patient.transform.Find("Cube").gameObject;
+        //     c.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        // }
         if(roadCount>=90){
             PlayerPrefs.SetInt("difficulty", 2);
         }else if(roadCount>=60){

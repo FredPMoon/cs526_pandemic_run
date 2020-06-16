@@ -14,8 +14,13 @@ public class ingredient : MonoBehaviour
         main_camera = GameObject.FindGameObjectWithTag("MainCamera");
         //t = gameObject.Find("text");
         //t = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        randomInfectionCheck();
         t.text = (this.gameObject.tag).ToUpper();
         cube.tag = this.gameObject.tag;
+        if(cube.tag == "p"){
+            cube.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        }
+        
     }
 
     // Update is called once per frame
@@ -24,6 +29,13 @@ public class ingredient : MonoBehaviour
          if (main_camera.transform.position.z > transform.position.z-5){
              Destroy(this.gameObject);
 
+        }
+    }
+
+    void randomInfectionCheck(){
+        int randomNum = Random.Range(0,10);
+        if(randomNum>5){
+            this.gameObject.tag = "p";
         }
     }
 }

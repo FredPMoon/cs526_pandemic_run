@@ -192,6 +192,11 @@ public class playerControl : MonoBehaviour
             Destroy(collider.gameObject);
             stop();
         }
+        if(collider.gameObject.tag.Equals("p")){
+            failure.SetActive(true);
+            Destroy(collider.gameObject);
+            stop();
+        }
         //Debug.Log(collider.gameObject.tag);
         
     }
