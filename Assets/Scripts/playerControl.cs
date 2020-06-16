@@ -10,7 +10,7 @@ public class playerControl : MonoBehaviour
     public float moveSpeed = 10f;
     public GameObject failure;
     public GameObject main_camera;
-    private int scoreNum = 0;
+    //private int scoreNum = 0;
     public Text score;
     public Text collection;
     private string package;
