@@ -85,7 +85,10 @@ public class playerControl : MonoBehaviour
     {
 		transform.Translate(Vector3.forward * 5f*Time.deltaTime);
 
-		if (transform.position.y == airPositionY)
+		if (Input.GetKey(KeyCode.DownArrow))
+            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+
+        if (transform.position.y == airPositionY)
 		{
 			if (jumpFrames < 60)
 			{

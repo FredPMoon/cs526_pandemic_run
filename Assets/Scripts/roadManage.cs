@@ -12,20 +12,20 @@ public class roadManage : MonoBehaviour
     public Text distance;
     private string roadColor;
     private int roadCount = 3;      //生成的第几个路径用于确定位置
-    public List<GameObject> roads = new List<GameObject>();
+    //public List<GameObject> roads = new List<GameObject>();
     //public GameObject[] roads;    //供随机生成的不同路径Prefabs;
     public GameObject road;
-    public GameObject r1;
-    public GameObject r2;
+    //public GameObject r1;
+    //public GameObject r2;
     
  
     public static roadManage _instance;
     // Start is called before the first frame update
     void Start()
     {
-        roads.Add(road);
-        roads.Add(r1);
-        roads.Add(r2);
+        //roads.Add(road);
+        //roads.Add(r1);
+        //roads.Add(r2);
 
         distance.text = "Distance: " + roadCount;
         _instance = this;
@@ -132,11 +132,11 @@ public class roadManage : MonoBehaviour
     {
         roadCount++;
         distance.text = "Distance: " + roadCount;
-        int type = Random.Range(0, roads.Count);
+        //int type = Random.Range(0, roads.Count);
         
-        GameObject newRoad = Instantiate(roads[type], new Vector3(3, 0, (roadCount*10)+2), Quaternion.identity) as GameObject;
+        //GameObject newRoad = Instantiate(roads[type], new Vector3(3, 0, (roadCount*10)+2), Quaternion.identity) as GameObject;
         //Debug.Log(roadCount);
-        //GameObject newRoad = Instantiate(road, new Vector3(3, 0, (roadCount*10)+2), Quaternion.identity) as GameObject;
+        GameObject newRoad = Instantiate(road, new Vector3(3, 0, (roadCount*10)+2), Quaternion.identity) as GameObject;
         road1 = road2;
         road2 = road3;
         road3 = road4;
