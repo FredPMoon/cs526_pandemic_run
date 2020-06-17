@@ -76,14 +76,16 @@ public class playerControl : MonoBehaviour
 		leftLanePositionX = midLanePositionX - 1 * 140f * Time.deltaTime;
 		rightLanePositionX = midLanePositionX + 1 * 140f * Time.deltaTime;
 		groundPositionY = transform.position.y;
-		airPositionY = groundPositionY + 80f * Time.deltaTime;
+		airPositionY = 2.5f;
 		jumpFrames = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-		transform.Translate(Vector3.forward * 5f*Time.deltaTime);
+        Vector3 runPos = transform.position;
+		runPos.z = main_camera.transform.position.z + 10;
+		transform.position = runPos;
 
 		if (Input.GetKey(KeyCode.DownArrow))
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
@@ -119,7 +121,7 @@ public class playerControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftArrow) && transform.position.x>-3)
 		{
-			if (!keyPressed)
+			if (!keyPressed && transform.position.y == groundPositionY)
 			{
 				if (transform.position.x == midLanePositionX)
 				{
@@ -139,7 +141,7 @@ public class playerControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.RightArrow) && transform.position.x<3)
 		{
-			if (!keyPressed)
+			if (!keyPressed && transform.position.y == groundPositionY)
 			{
 				if (transform.position.x == midLanePositionX)
 				{
