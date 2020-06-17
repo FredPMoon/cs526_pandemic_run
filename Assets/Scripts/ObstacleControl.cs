@@ -48,18 +48,19 @@ public class ObstacleControl : MonoBehaviour
             GameObject obj = GameObject.Instantiate(Obstacles[obsIndex], position, Quaternion.identity);
             if (obsIndex == 0)
             {
-                if (position.x == -4)
-                {
-                    obj.tag = "1";
-                }
-                else if (position.x == 0)
-                {
-                    obj.tag = "2";
-                }
-                else
-                {
-                    obj.tag = "3";
-                }
+                // if (position.x == -4)
+                // {
+                //     obj.tag = "1";
+                // }
+                // else if (position.x == 0)
+                // {
+                //     obj.tag = "2";
+                // }
+                // else
+                // {
+                //     obj.tag = "3";
+                // }
+                obj.tag = "p";
             }
             else if (obsIndex == 1)
             {
