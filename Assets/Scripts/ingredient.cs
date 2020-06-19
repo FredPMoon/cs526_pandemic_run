@@ -14,12 +14,12 @@ public class ingredient : MonoBehaviour
         main_camera = GameObject.FindGameObjectWithTag("MainCamera");
         //t = gameObject.Find("text");
         //t = GameObject.Find("Canvas/Text").GetComponent<Text>();
-        randomInfectionCheck();
+        //randomInfectionCheck();
         t.text = (this.gameObject.tag).ToUpper();
         cube.tag = this.gameObject.tag;
-        if(cube.tag == "p"){
-            cube.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        }
+        // if(cube.tag == "p"){
+        //     cube.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        // }
         
     }
 

@@ -269,6 +269,10 @@ public class playerControl : MonoBehaviour
     void powerUp_z()
     {
         //clear the infected, positive patients
+        GameObject[] patients = GameObject.FindGameObjectsWithTag("p");
+        foreach(GameObject patient in patients){
+            Destroy(patient);
+        }
         Debug.Log("Z");
     }
 

@@ -64,15 +64,15 @@ public class ObstacleControl : MonoBehaviour
             }
             else if (obsIndex == 1)
             {
-                obj.tag = "4"; // meterial 1
+                obj.tag = "a"; // meterial 1
             }
             else if (obsIndex == 2)
             {
-                obj.tag = "5"; // meterial 2
+                obj.tag = "b"; // meterial 2
             }
             else
             {
-                obj.tag = "6"; // meterial 3
+                obj.tag = "c"; // meterial 3
             }
         }
     }
