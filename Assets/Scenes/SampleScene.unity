@@ -1081,6 +1081,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7797525206474775725, guid: b22291764375e9a4dbd2cf26e2f1bee9,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7797525206474775727, guid: b22291764375e9a4dbd2cf26e2f1bee9,
         type: 3}
       propertyPath: m_Name
@@ -1938,7 +1943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Obstacles:
-  - {fileID: 1000012343480272, guid: 9425302b7c44a194bb8782c22588bfe2, type: 3}
+  - {fileID: 1178924982735770241, guid: 34cd94ea5ff08e147b1f86e98c18a973, type: 3}
   - {fileID: 1000011038145264, guid: 45c7dddf851acbb4e94a8fc0ead66eed, type: 3}
   - {fileID: 1000011262040222, guid: 196fe542ad163b149adf1ca04c19c753, type: 3}
   - {fileID: 1000011395917184, guid: 630adda25e718324a80512d3e4d69e13, type: 3}
