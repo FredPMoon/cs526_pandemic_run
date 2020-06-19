@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.Diagnostics;
+using System.Threading;
 
 public class ObstacleControl : MonoBehaviour
 {
@@ -20,18 +22,21 @@ public class ObstacleControl : MonoBehaviour
         float StartLength = 15; // obstacle start position 
         float z = transform.position.z + StartLength;
 
-        int prob = Random.Range(0, 100);// Obstacles.Length
+        long tick = System.DateTime.Now.Ticks;
+        System.Random rd = new System.Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+        int prob = rd.Next(0, 100);
+
         int obsIndex = 0;
 
-        if (prob <= 85)
+        if (prob <= 70)
         {
             obsIndex = 0;
         }
-        else if (prob <= 90)
+        else if (prob <= 80)
         {
             obsIndex = 1;
         }
-        else if (prob <= 95)
+        else if (prob <= 90)
         {
             obsIndex = 2;
         }
@@ -78,9 +83,17 @@ public class ObstacleControl : MonoBehaviour
     }
 
     Vector3 GetPos(float z, List<int> Zindex)
-    { 
+    {
+        //int iSeed = 10;
+        //System.Random rd = new System.Random(iSeed);
 
-        int Xindex = Random.Range(-1, 2) * 3; //-4，0，4： three tracks
+        //int iSeed = System.Guid.NewGuid().GetHashCode();
+        //System.Random rd = new System.Random(iSeed);
+
+        long tick = System.DateTime.Now.Ticks;
+        System.Random rd = new System.Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+
+        int Xindex = rd.Next(-1, 2) * 3; //-4，0，4： three tracks
 
         int z_int = (int) Mathf.Round(z);
 
@@ -91,7 +104,7 @@ public class ObstacleControl : MonoBehaviour
         }
         else
         {
-            for (int i = (int)z_int; i <= z_int + 3; i++)
+            for (int i = (int)z_int; i <= z_int + 2; i++)
             {
                 Zindex.Add(i);
             }
