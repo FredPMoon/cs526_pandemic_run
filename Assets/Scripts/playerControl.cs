@@ -46,12 +46,15 @@ public class playerControl : MonoBehaviour
 	public int jumpFrames;
     public bool shakeTF = false;
     public float playerSpeed;
-    public int laneSwitchStatus; // 0 means no movement; 1 means left; 2 means right
+    public int playerMoveStatus; // 0 means no movement; 1 means left; 2 means right; 3 means jump
     public float laneSwitchStartTime;
     //Vector3 leftLanePlayerPos;
     //Vector3 rightLanePlayerPos;
     //Vector3 midLanePlayerPos;
     float laneSwitchEndX;
+    float playerJumpSpeed;
+    float gravityForce;
+    float playerJumpTime;
 
     void Start()
     {
@@ -90,11 +93,13 @@ public class playerControl : MonoBehaviour
 		airPositionY = 2.5f;
 		jumpFrames = 0;
         playerSpeed = 20.0f;
-        laneSwitchStatus = 0;
+        playerMoveStatus = 0;
         laneSwitchEndX = 1000f;
         //midLanePlayerPos = transform.position;
         //leftLanePlayerPos = new Vector3(leftLanePositionX, transform.position.y, transform.position.z);
         //rightLanePlayerPos = new Vector3(rightLanePositionX, transform.position.y, transform.position.z);
+        playerJumpSpeed = 25f;
+        gravityForce = 70f;
     }
 
     // Update is called once per frame
@@ -124,26 +129,28 @@ public class playerControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow))
 		{
-			if (!keyPressed)
+			if (!keyPressed && playerMoveStatus == 0)
 			{
 				if (transform.position.y == groundPositionY)
 				{
-					Vector3 pos = transform.position;
-					pos.y = airPositionY;
-					transform.position = pos;
-				}
+					//Vector3 pos = transform.position;
+					//pos.y = airPositionY;
+					//transform.position = pos;
+                    playerMoveStatus = 3;
+                    playerJumpTime = Time.time;
+                }
 				keyPressed = true;
 			}
 		}
 
-        if (laneSwitchStatus != 0) {
-            if (laneSwitchStatus == 1)
+        if (playerMoveStatus != 0) {
+            if (playerMoveStatus == 1)
             {
                 if (laneSwitchEndX != 1000f)
                 {
                     if (transform.position.x == laneSwitchEndX)
                     {
-                        laneSwitchStatus = 0;
+                        playerMoveStatus = 0;
                         laneSwitchEndX = 1000f;
                     }
                     else if (laneSwitchEndX == midLanePositionX)
@@ -165,12 +172,13 @@ public class playerControl : MonoBehaviour
                 }
             }
 
-            else if (laneSwitchStatus == 2) {
+            else if (playerMoveStatus == 2)
+            {
                 if (laneSwitchEndX != 1000f)
                 {
                     if (transform.position.x == laneSwitchEndX)
                     {
-                        laneSwitchStatus = 0;
+                        playerMoveStatus = 0;
                         laneSwitchEndX = 1000f;
                     }
                     else if (laneSwitchEndX == rightLanePositionX)
@@ -193,9 +201,23 @@ public class playerControl : MonoBehaviour
 
             }
 
+            else if (playerMoveStatus == 3) {
+                float time = Time.time - playerJumpTime;
+                Vector3 pos = transform.position;
+                float yPos = groundPositionY + time * playerJumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
+                if (yPos < groundPositionY) {
+                    playerMoveStatus = 0;
+                    pos.y = groundPositionY;
+                    transform.position = pos;
+                }
+                else {
+                    pos.y = yPos;
+                    transform.position = pos;
+                }
+            }
         }
 
-        if (laneSwitchStatus == 0 && Input.GetKey(KeyCode.LeftArrow) && transform.position.x>-3)
+        if (playerMoveStatus == 0 && Input.GetKey(KeyCode.LeftArrow) && transform.position.x>-3)
 		{
 			if (!keyPressed && transform.position.y == groundPositionY)
 			{
@@ -212,7 +234,7 @@ public class playerControl : MonoBehaviour
                 //	transform.position = pos;
                 //}
 
-                laneSwitchStatus = 1;
+                playerMoveStatus = 1;
                 laneSwitchStartTime = Time.time;
 
 				keyPressed = true;
@@ -236,7 +258,7 @@ public class playerControl : MonoBehaviour
                 //	transform.position = pos;
                 //}
 
-                laneSwitchStatus = 2;
+                playerMoveStatus = 2;
                 laneSwitchStartTime = Time.time;
 				keyPressed = true;
 			}
@@ -259,7 +281,8 @@ public class playerControl : MonoBehaviour
         }
     }
 
-    void laneSwitch(float startX, float endX) {
+    void laneSwitch(float startX, float endX)
+    {
         float y = transform.position.y;
         float z = transform.position.z;
         // Distance moved equals elapsed time times speed..
@@ -268,6 +291,7 @@ public class playerControl : MonoBehaviour
         transform.position = Vector3.Lerp(new Vector3(startX, y, z), new Vector3(endX, y, z), fractionOfJourney);
 
     }
+
 
     void OnTriggerEnter(Collider collider)
     {
