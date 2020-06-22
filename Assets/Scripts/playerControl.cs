@@ -15,10 +15,12 @@ public class playerControl : MonoBehaviour
     public Text collection;
     private string package;
     public GameObject canvas;
+    public GameObject shield;
     int[] constraint_x = {-3, 3};
     public Text recipe_1;
     public Text recipe_2;
     public Text recipe_3;
+    public bool isShield;
     private string menu_1;
     private string menu_2;
     private string menu_3;
@@ -198,9 +200,15 @@ public class playerControl : MonoBehaviour
             stop();
         }
         if(collider.gameObject.tag.Equals("p")){
-            failure.SetActive(true);
+            shakeTF = true;
+            if(isShield==false){
+                failure.SetActive(true);
+                stop();
+            }else{
+                isShield = false;
+                shield.SetActive(false);
+            }
             Destroy(collider.gameObject);
-            stop();
         }
         //Debug.Log(collider.gameObject.tag);
         
@@ -254,15 +262,18 @@ public class playerControl : MonoBehaviour
      void powerUp_x()
     {
         //实现屏幕震动
-        shakeTF = true;
-        //adding health
+        //shakeTF = true;
+        //添加保护层
+        isShield = true;
+        shield.SetActive(true);
         Debug.Log("X");
     }
 
     void powerUp_y()
     {
-        shakeTF = true;
+        //shakeTF = true;
         //slow the camera move speed
+        main_camera.GetComponent<follow>().speed -= 2f;
         Debug.Log("Y");
     }
 
