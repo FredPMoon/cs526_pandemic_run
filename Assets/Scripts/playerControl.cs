@@ -99,7 +99,7 @@ public class playerControl : MonoBehaviour
         //leftLanePlayerPos = new Vector3(leftLanePositionX, transform.position.y, transform.position.z);
         //rightLanePlayerPos = new Vector3(rightLanePositionX, transform.position.y, transform.position.z);
         playerJumpSpeed = 25f;
-        gravityForce = 70f;
+        gravityForce = 50f;
     }
 
     // Update is called once per frame
