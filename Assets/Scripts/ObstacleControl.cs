@@ -22,21 +22,22 @@ public class ObstacleControl : MonoBehaviour
         float StartLength = 15; // obstacle start position 
         float z = transform.position.z + StartLength;
 
-        long tick = System.DateTime.Now.Ticks;
-        System.Random rd = new System.Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+        //long tick = System.DateTime.Now.Ticks;
+        //System.Random rd = new System.Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+        System.Random rd = new System.Random();
         int prob = rd.Next(0, 100);
 
         int obsIndex = 0;
 
-        if (prob <= 70)
+        if (prob <= 64)
         {
             obsIndex = 0;
         }
-        else if (prob <= 80)
+        else if (prob <= 76)
         {
             obsIndex = 1;
         }
-        else if (prob <= 90)
+        else if (prob <= 88)
         {
             obsIndex = 2;
         }
@@ -84,18 +85,21 @@ public class ObstacleControl : MonoBehaviour
 
     Vector3 GetPos(float z, List<int> Zindex)
     {
-        //int iSeed = 10;
-        //System.Random rd = new System.Random(iSeed);
+
+        int z_int = (int)Mathf.Round(z);
+
+        int iSeed = z_int;
+        System.Random rd = new System.Random(iSeed);
 
         //int iSeed = System.Guid.NewGuid().GetHashCode();
         //System.Random rd = new System.Random(iSeed);
 
-        long tick = System.DateTime.Now.Ticks;
-        System.Random rd = new System.Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+        //long tick = System.DateTime.Now.Ticks;
+        //System.Random rd = new System.Random((int)(tick & 0xffffffffL) | (int)(tick >> 32));
+
+        //System.Random rd = new System.Random();
 
         int Xindex = rd.Next(-1, 2) * 3; //-4，0，4： three tracks
-
-        int z_int = (int) Mathf.Round(z);
 
         if (Zindex.Contains(z_int) == true)
         {
