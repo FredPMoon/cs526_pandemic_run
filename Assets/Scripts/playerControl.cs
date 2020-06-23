@@ -55,6 +55,7 @@ public class playerControl : MonoBehaviour
     float playerJumpSpeed;
     float gravityForce;
     float playerJumpTime;
+    float simulatedY;
 
     void Start()
     {
@@ -109,8 +110,8 @@ public class playerControl : MonoBehaviour
 		runPos.z = main_camera.transform.position.z + 10;
 		transform.position = runPos;
 
-		if (Input.GetKey(KeyCode.DownArrow))
-            transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+		// if (Input.GetKey(KeyCode.DownArrow))
+        //     transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
 
         if (transform.position.y == airPositionY)
 		{
@@ -204,14 +205,20 @@ public class playerControl : MonoBehaviour
             else if (playerMoveStatus == 3) {
                 float time = Time.time - playerJumpTime;
                 Vector3 pos = transform.position;
-                float yPos = groundPositionY + time * playerJumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
+                float JumpSpeed = playerJumpSpeed/(main_camera.GetComponent<follow>().speed/5f);
+                //simulatedY = groundPositionY + time * JumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
+                float yPos = groundPositionY + time * JumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
                 if (yPos < groundPositionY) {
                     playerMoveStatus = 0;
                     pos.y = groundPositionY;
                     transform.position = pos;
                 }
                 else {
-                    pos.y = yPos;
+                    if(yPos<7.0f){
+                        pos.y = yPos;
+                    }else{
+                        pos.y = 7.0f;
+                    }
                     transform.position = pos;
                 }
             }
