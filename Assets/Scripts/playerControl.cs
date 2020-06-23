@@ -112,20 +112,20 @@ public class playerControl : MonoBehaviour
 		if (Input.GetKey(KeyCode.DownArrow))
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
 
-        if (transform.position.y == airPositionY)
-		{
-			if (jumpFrames < 60)
-			{
-				jumpFrames++;
-			}
-			else
-			{
-				Vector3 pos = transform.position;
-				pos.y = groundPositionY;
-				transform.position = pos;
-				jumpFrames = 0;
-			}
-		}
+  //      if (transform.position.y == airPositionY)
+		//{
+		//	if (jumpFrames < 60)
+		//	{
+		//		jumpFrames++;
+		//	}
+		//	else
+		//	{
+		//		Vector3 pos = transform.position;
+		//		pos.y = groundPositionY;
+		//		transform.position = pos;
+		//		jumpFrames = 0;
+		//	}
+		//}
 
         if (Input.GetKey(KeyCode.UpArrow))
 		{
@@ -170,6 +170,10 @@ public class playerControl : MonoBehaviour
                 {
                     laneSwitchEndX = leftLanePositionX;
                 }
+                else
+                {
+                    playerMoveStatus = 0;
+                }
             }
 
             else if (playerMoveStatus == 2)
@@ -197,6 +201,9 @@ public class playerControl : MonoBehaviour
                 else if (transform.position.x == midLanePositionX)
                 {
                     laneSwitchEndX = rightLanePositionX;
+                }
+                else{
+                    playerMoveStatus = 0;
                 }
 
             }
