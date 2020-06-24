@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t: {fileID: 3092664779390878285}
   cube: {fileID: 1000011262040222}
+  canvas: {fileID: 2922123666918465071}
 --- !u!1 &761018286201353488
 GameObject:
   m_ObjectHideFlags: 0
