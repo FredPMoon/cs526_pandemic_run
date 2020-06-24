@@ -212,8 +212,8 @@ public class playerControl : MonoBehaviour
             else if (playerMoveStatus == 3) {
                 float time = Time.time - playerJumpTime;
                 Vector3 pos = transform.position;
-                float JumpSpeed = playerJumpSpeed/(main_camera.GetComponent<follow>().speed/5f);
-                //simulatedY = groundPositionY + time * JumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
+                //float JumpSpeed = playerJumpSpeed/(main_camera.GetComponent<follow>().speed/5f);
+                float JumpSpeed = playerJumpSpeed;
                 float yPos = groundPositionY + time * JumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
                 if (yPos < groundPositionY) {
                     playerMoveStatus = 0;
@@ -402,7 +402,7 @@ public class playerControl : MonoBehaviour
     {
         //shakeTF = true;
         //slow the camera move speed
-        main_camera.GetComponent<follow>().speed -= 2f;
+        //main_camera.GetComponent<follow>().speed -= 2f;
         Debug.Log("Y");
     }
 
@@ -473,6 +473,7 @@ public class playerControl : MonoBehaviour
     }
     void updateRecipe()
     {
+        int index = Random.Range(0, 3);
 
     }
     public IEnumerator Shake(float duration, float magnitude)
