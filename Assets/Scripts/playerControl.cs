@@ -46,16 +46,16 @@ public class playerControl : MonoBehaviour
 	public int jumpFrames;
     public bool shakeTF = false;
     public float playerSpeed;
-    public int playerMoveStatus; // 0 means no movement; 1 means left; 2 means right; 3 means jump
+    public bool isMoving;
+    public bool isJumping;
     public float laneSwitchStartTime;
-    //Vector3 leftLanePlayerPos;
-    //Vector3 rightLanePlayerPos;
-    //Vector3 midLanePlayerPos;
+    float laneSwitchStartX;
     float laneSwitchEndX;
     float playerJumpSpeed;
     float gravityForce;
     float playerJumpTime;
     float simulatedY;
+    readonly float undefinedX = 1000.0f;
 
     void Start()
     {
@@ -86,21 +86,17 @@ public class playerControl : MonoBehaviour
 
         // swipeBehavior = FindObjectOfType<SwipeBehavior>();
 		midLanePositionX = transform.position.x;
-		//leftLanePositionX = midLanePositionX - 1 * 140f * Time.deltaTime;
-		//rightLanePositionX = midLanePositionX + 1 * 140f * Time.deltaTime;
         leftLanePositionX = midLanePositionX - 1 * 140f * 0.02f;
         rightLanePositionX = midLanePositionX + 1 * 140f * 0.02f;
         groundPositionY = transform.position.y;
 		airPositionY = 2.5f;
 		jumpFrames = 0;
         playerSpeed = 20.0f;
-        playerMoveStatus = 0;
         laneSwitchEndX = 1000f;
-        //midLanePlayerPos = transform.position;
-        //leftLanePlayerPos = new Vector3(leftLanePositionX, transform.position.y, transform.position.z);
-        //rightLanePlayerPos = new Vector3(rightLanePositionX, transform.position.y, transform.position.z);
         playerJumpSpeed = 25f;
         gravityForce = 50f;
+        isMoving = false;
+        isJumping = false;
     }
 
     // Update is called once per frame
@@ -113,170 +109,99 @@ public class playerControl : MonoBehaviour
 		// if (Input.GetKey(KeyCode.DownArrow))
         //     transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
 
-  //      if (transform.position.y == airPositionY)
-		//{
-		//	if (jumpFrames < 60)
-		//	{
-		//		jumpFrames++;
-		//	}
-		//	else
-		//	{
-		//		Vector3 pos = transform.position;
-		//		pos.y = groundPositionY;
-		//		transform.position = pos;
-		//		jumpFrames = 0;
-		//	}
-		//}
-
         if (Input.GetKey(KeyCode.UpArrow))
 		{
-			if (!keyPressed && playerMoveStatus == 0)
+
+            Debug.Log("is moving: " + isMoving);
+            Debug.Log("is jumping: " + isJumping);
+            if (!keyPressed && !isMoving)
 			{
-				if (transform.position.y == groundPositionY)
+				if (isPlayerOnGrond())
 				{
-					//Vector3 pos = transform.position;
-					//pos.y = airPositionY;
-					//transform.position = pos;
-                    playerMoveStatus = 3;
                     playerJumpTime = Time.time;
+                    isJumping = true;
                 }
 				keyPressed = true;
 			}
 		}
 
-        if (playerMoveStatus != 0) {
-            if (playerMoveStatus == 1)
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            if (!keyPressed && !isJumping)
             {
-                if (laneSwitchEndX != 1000f)
+                float playerPosX = transform.position.x;
+                if (playerPosX > leftLanePositionX)
                 {
-                    if (transform.position.x == laneSwitchEndX)
-                    {
-                        playerMoveStatus = 0;
-                        laneSwitchEndX = 1000f;
-                    }
-                    else if (laneSwitchEndX == midLanePositionX)
-                    {
-                        laneSwitch(rightLanePositionX, midLanePositionX);
-                    }
-                    else if (laneSwitchEndX == leftLanePositionX)
-                    {
-                        laneSwitch(midLanePositionX, leftLanePositionX);
-                    }
-                }
-                else if (transform.position.x == rightLanePositionX)
-                {
-                    laneSwitchEndX = midLanePositionX;
-                }
-                else if (transform.position.x == midLanePositionX)
-                {
-                    laneSwitchEndX = leftLanePositionX;
-                }
-                else
-                {
-                    playerMoveStatus = 0;
-                }
-            }
 
-            else if (playerMoveStatus == 2)
-            {
-                if (laneSwitchEndX != 1000f)
-                {
-                    if (transform.position.x == laneSwitchEndX)
+                    isMoving = true;
+                    laneSwitchStartTime = Time.time;
+                    laneSwitchStartX = playerPosX;
+                    if (playerPosX <= midLanePositionX)
                     {
-                        playerMoveStatus = 0;
-                        laneSwitchEndX = 1000f;
+                        laneSwitchEndX = leftLanePositionX;
                     }
-                    else if (laneSwitchEndX == rightLanePositionX)
+                    else
                     {
-                        laneSwitch(midLanePositionX, rightLanePositionX);
-                    }
-                    else if (laneSwitchEndX == midLanePositionX)
-                    {
-                        laneSwitch(leftLanePositionX, midLanePositionX);
+                        laneSwitchEndX = midLanePositionX;
                     }
                 }
-                else if (transform.position.x == leftLanePositionX)
-                {
-                    laneSwitchEndX = midLanePositionX;
-                }
-                else if (transform.position.x == midLanePositionX)
-                {
-                    laneSwitchEndX = rightLanePositionX;
-                }
-                else{
-                    playerMoveStatus = 0;
-                }
-
-            }
-
-            else if (playerMoveStatus == 3) {
-                float time = Time.time - playerJumpTime;
-                Vector3 pos = transform.position;
-                //float JumpSpeed = playerJumpSpeed/(main_camera.GetComponent<follow>().speed/5f);
-                float JumpSpeed = playerJumpSpeed;
-                float yPos = groundPositionY + time * JumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
-                if (yPos < groundPositionY) {
-                    playerMoveStatus = 0;
-                    pos.y = groundPositionY;
-                    transform.position = pos;
-                }
-                else {
-                    if(yPos<7.0f){
-                        pos.y = yPos;
-                    }else{
-                        pos.y = 7.0f;
-                    }
-                    transform.position = pos;
-                }
+                keyPressed = true;
             }
         }
 
-        if (playerMoveStatus == 0 && Input.GetKey(KeyCode.LeftArrow) && transform.position.x>-3)
-		{
-			if (!keyPressed && transform.position.y == groundPositionY)
-			{
-                //if (transform.position.x == midLanePositionX)
-                //{
-                //	Vector3 pos = transform.position;
-                //	pos.x = leftLanePositionX;
-                //	transform.position = pos;
-                //}
-                //else if (transform.position.x == rightLanePositionX)
-                //{
-                //	Vector3 pos = transform.position;
-                //	pos.x = midLanePositionX;
-                //	transform.position = pos;
-                //}
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            if (!keyPressed && !isJumping)
+            {
+                float playerPosX = transform.position.x;
+                if (playerPosX < rightLanePositionX)
+                {
 
-                playerMoveStatus = 1;
-                laneSwitchStartTime = Time.time;
+                    isMoving = true;
+                    laneSwitchStartTime = Time.time;
+                    laneSwitchStartX = playerPosX;
+                    if (playerPosX >= midLanePositionX)
+                    {
+                        laneSwitchEndX = rightLanePositionX;
+                    }
+                    else
+                    {
+                        laneSwitchEndX = midLanePositionX;
+                    }
+                }
+                keyPressed = true;
+            }
+        }
 
-				keyPressed = true;
-			}
-		}
+        if (isMoving) {
+            laneSwitch(laneSwitchStartX, laneSwitchEndX);
+        }
 
-        if (Input.GetKey(KeyCode.RightArrow) && transform.position.x<3)
-		{
-			if (!keyPressed && transform.position.y == groundPositionY)
-			{
-                //if (transform.position.x == midLanePositionX)
-                //{
-                //	Vector3 pos = transform.position;
-                //	pos.x = rightLanePositionX;
-                //	transform.position = pos;
-                //}
-                //else if (transform.position.x == leftLanePositionX)
-                //{
-                //	Vector3 pos = transform.position;
-                //	pos.x = midLanePositionX;
-                //	transform.position = pos;
-                //}
-
-                playerMoveStatus = 2;
-                laneSwitchStartTime = Time.time;
-				keyPressed = true;
-			}
-		}
+        if (isJumping) {
+            float time = Time.time - playerJumpTime;
+            Vector3 pos = transform.position;
+            //float JumpSpeed = playerJumpSpeed/(main_camera.GetComponent<follow>().speed/5f);
+            float JumpSpeed = playerJumpSpeed;
+            float yPos = groundPositionY + time * JumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
+            if (yPos < groundPositionY)
+            {
+                isJumping = false;
+                pos.y = groundPositionY;
+                transform.position = pos;
+            }
+            else
+            {
+                if (yPos < 7.0f)
+                {
+                    pos.y = yPos;
+                }
+                else
+                {
+                    pos.y = 7.0f;
+                }
+                transform.position = pos;
+            }
+        }
 
 		if ((!Input.GetKey(KeyCode.LeftArrow)) && (!Input.GetKey(KeyCode.RightArrow)) && (!Input.GetKey(KeyCode.UpArrow)))
 		{
@@ -301,9 +226,19 @@ public class playerControl : MonoBehaviour
         float z = transform.position.z;
         // Distance moved equals elapsed time times speed..
         float distCovered = (Time.time - laneSwitchStartTime) * playerSpeed;
-        float fractionOfJourney = distCovered / (midLanePositionX - leftLanePositionX);
+        float fractionOfJourney = distCovered / Mathf.Abs(endX - startX);
         transform.position = Vector3.Lerp(new Vector3(startX, y, z), new Vector3(endX, y, z), fractionOfJourney);
 
+        if (float.Parse(transform.position.x.ToString("0.00")) == endX) {
+            isMoving = false;
+            laneSwitchEndX = undefinedX;
+            laneSwitchStartX = undefinedX;
+            transform.position = new Vector3(endX, y, z);
+        }
+    }
+
+    bool isPlayerOnGrond() {
+        return transform.position.y == groundPositionY;
     }
 
 
@@ -342,6 +277,7 @@ public class playerControl : MonoBehaviour
         //Debug.Log(collider.gameObject.tag);
         
     }
+
 
     public void stop(){
         follow other = (follow)main_camera.GetComponent(typeof(follow));
