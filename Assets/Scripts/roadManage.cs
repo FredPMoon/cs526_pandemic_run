@@ -61,71 +61,71 @@ public class roadManage : MonoBehaviour
         int infection2 = PlayerPrefs.GetInt("infection_2");
         int infection3 = PlayerPrefs.GetInt("infection_3");
         //path1
-        if(infection1>=10){
-            GameObject[] paths_1 = GameObject.FindGameObjectsWithTag("path1");
-            foreach(GameObject path in paths_1){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-            }
-            GameObject[] obstacles = GameObject.FindGameObjectsWithTag("1");
-            foreach(GameObject obstacle in obstacles){
-                obstacle.tag = "positive";
-                //obstacle.GetComponent<Renderer>().material.SetColor("_color", Color.magenta);
-            }
-        }else if(infection1>=5){
-            GameObject[] paths_1 = GameObject.FindGameObjectsWithTag("path1");
-            foreach(GameObject path in paths_1){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-            }
-        }else{
-            GameObject[] paths_1 = GameObject.FindGameObjectsWithTag("path1");
-            foreach(GameObject path in paths_1){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-            }
-        }
-        //path2
-        if(infection2>=10){
-            GameObject[] paths_2 = GameObject.FindGameObjectsWithTag("path2");
-            foreach(GameObject path in paths_2){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-            }
-            GameObject[] obstacles = GameObject.FindGameObjectsWithTag("2");
-            foreach(GameObject obstacle in obstacles){
-                obstacle.tag = "positive";
-                //obstacle.GetComponent<Renderer>().material.SetColor("_color", Color.magenta);
-            }
-        }else if(infection2>=5){
-            GameObject[] paths_2 = GameObject.FindGameObjectsWithTag("path2");
-            foreach(GameObject path in paths_2){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-            }
-        }else{
-            GameObject[] paths_2 = GameObject.FindGameObjectsWithTag("path2");
-            foreach(GameObject path in paths_2){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-            }
-        }
-        //path3
-        if(infection3>=10){
-            GameObject[] paths_3 = GameObject.FindGameObjectsWithTag("path3");
-            foreach(GameObject path in paths_3){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-            }
-            GameObject[] obstacles = GameObject.FindGameObjectsWithTag("3");
-            foreach(GameObject obstacle in obstacles){
-                obstacle.tag = "positive";
-                //obstacle.GetComponent<Renderer>().material.SetColor("_color", Color.magenta);
-            }
-        }else if(infection3>=5){
-            GameObject[] paths_3 = GameObject.FindGameObjectsWithTag("path3");
-            foreach(GameObject path in paths_3){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
-            }
-        }else{
-            GameObject[] paths_3 = GameObject.FindGameObjectsWithTag("path3");
-            foreach(GameObject path in paths_3){
-                path.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-            }
-        }
+        // if(infection1>=10){
+        //     GameObject[] paths_1 = GameObject.FindGameObjectsWithTag("path1");
+        //     foreach(GameObject path in paths_1){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        //     }
+        //     GameObject[] obstacles = GameObject.FindGameObjectsWithTag("1");
+        //     foreach(GameObject obstacle in obstacles){
+        //         obstacle.tag = "positive";
+        //         //obstacle.GetComponent<Renderer>().material.SetColor("_color", Color.magenta);
+        //     }
+        // }else if(infection1>=5){
+        //     GameObject[] paths_1 = GameObject.FindGameObjectsWithTag("path1");
+        //     foreach(GameObject path in paths_1){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+        //     }
+        // }else{
+        //     GameObject[] paths_1 = GameObject.FindGameObjectsWithTag("path1");
+        //     foreach(GameObject path in paths_1){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        //     }
+        // }
+        // //path2
+        // if(infection2>=10){
+        //     GameObject[] paths_2 = GameObject.FindGameObjectsWithTag("path2");
+        //     foreach(GameObject path in paths_2){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        //     }
+        //     GameObject[] obstacles = GameObject.FindGameObjectsWithTag("2");
+        //     foreach(GameObject obstacle in obstacles){
+        //         obstacle.tag = "positive";
+        //         //obstacle.GetComponent<Renderer>().material.SetColor("_color", Color.magenta);
+        //     }
+        // }else if(infection2>=5){
+        //     GameObject[] paths_2 = GameObject.FindGameObjectsWithTag("path2");
+        //     foreach(GameObject path in paths_2){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+        //     }
+        // }else{
+        //     GameObject[] paths_2 = GameObject.FindGameObjectsWithTag("path2");
+        //     foreach(GameObject path in paths_2){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        //     }
+        // }
+        // //path3
+        // if(infection3>=10){
+        //     GameObject[] paths_3 = GameObject.FindGameObjectsWithTag("path3");
+        //     foreach(GameObject path in paths_3){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        //     }
+        //     GameObject[] obstacles = GameObject.FindGameObjectsWithTag("3");
+        //     foreach(GameObject obstacle in obstacles){
+        //         obstacle.tag = "positive";
+        //         //obstacle.GetComponent<Renderer>().material.SetColor("_color", Color.magenta);
+        //     }
+        // }else if(infection3>=5){
+        //     GameObject[] paths_3 = GameObject.FindGameObjectsWithTag("path3");
+        //     foreach(GameObject path in paths_3){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+        //     }
+        // }else{
+        //     GameObject[] paths_3 = GameObject.FindGameObjectsWithTag("path3");
+        //     foreach(GameObject path in paths_3){
+        //         path.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        //     }
+        // }
         
     }
     public void GenerateRoad()

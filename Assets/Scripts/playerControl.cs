@@ -24,13 +24,30 @@ public class playerControl : MonoBehaviour
     private string menu_1;
     private string menu_2;
     private string menu_3;
+    public Sprite sprite_a;  
+    public Sprite sprite_b; 
+    public Sprite sprite_c;   
+    public Sprite sprite_x;
+    public Sprite sprite_y;  
+    public Sprite sprite_z;  
     
 
     public GameObject frame00; public GameObject frame01; public GameObject frame02; public GameObject frame03; public GameObject frame04;
     public GameObject frame10; public GameObject frame11; public GameObject frame12; public GameObject frame13; public GameObject frame14;
     public GameObject frame20; public GameObject frame21; public GameObject frame22; public GameObject frame23; public GameObject frame24;
-
     public List<GameObject> frames = new List<GameObject>();
+
+    public GameObject image00, image01, image02, image03, image04;
+    public GameObject image05, image06, image07, image08, image09;
+    public GameObject image10, image11, image12, image13, image14;
+    public List<GameObject> images = new List<GameObject>();
+    public List<string[]> recipes = new List<string[]>();
+
+    public GameObject powerImage_1, powerImage_2, powerImage_3;
+
+    public GameObject Hat, Pants;
+
+    public Material Red, BabyBlue;
 
     string[] recipes00 = {"aacx", "bbax", "abbx", "abbx"};
     string[] recipes01 = {"abcy", "bacy", "caby", "acby"};
@@ -56,33 +73,33 @@ public class playerControl : MonoBehaviour
     float gravityForce;
     float playerJumpTime;
     float simulatedY;
+    float timer = 4.0f;
+    public Image icon_1;
+    public Image icon_2;
+    public Image icon_3;
+    bool superJump;
+    bool jumpShield;
 
     void Start()
     {
 		menu_1 = recipes00[0];
         menu_2 = recipes01[0];
         menu_3 = recipes02[0];
+        recipes.Add(recipes00);
+        recipes.Add(recipes01);
+        recipes.Add(recipes02);
         recipe_1.text = format(menu_1);
         recipe_2.text = format(menu_2);
         recipe_3.text = format(menu_3);
         frame00.SetActive(true);
         frame10.SetActive(true);
         frame20.SetActive(true);
-        frames.Add(frame00);
-        frames.Add(frame01);
-        frames.Add(frame02);
-        frames.Add(frame03);
-        frames.Add(frame04);
-        frames.Add(frame10);
-        frames.Add(frame11);
-        frames.Add(frame12);
-        frames.Add(frame13);
-        frames.Add(frame14);
-        frames.Add(frame20);
-        frames.Add(frame21);
-        frames.Add(frame22);
-        frames.Add(frame23);
-        frames.Add(frame24);
+        frames.Add(frame00); frames.Add(frame01); frames.Add(frame02); frames.Add(frame03); frames.Add(frame04);
+        frames.Add(frame10); frames.Add(frame11); frames.Add(frame12); frames.Add(frame13); frames.Add(frame14);
+        frames.Add(frame20); frames.Add(frame21); frames.Add(frame22); frames.Add(frame23); frames.Add(frame24);
+        images.Add(image00); images.Add(image01); images.Add(image02); images.Add(image03); images.Add(image04);
+        images.Add(image05); images.Add(image06); images.Add(image07); images.Add(image08); images.Add(image09);
+        images.Add(image10); images.Add(image11); images.Add(image12); images.Add(image13); images.Add(image14);
 
         // swipeBehavior = FindObjectOfType<SwipeBehavior>();
 		midLanePositionX = transform.position.x;
@@ -101,6 +118,8 @@ public class playerControl : MonoBehaviour
         //rightLanePlayerPos = new Vector3(rightLanePositionX, transform.position.y, transform.position.z);
         playerJumpSpeed = 25f;
         gravityForce = 50f;
+        //配方展示
+        recipeBuild();
     }
 
     // Update is called once per frame
@@ -147,6 +166,7 @@ public class playerControl : MonoBehaviour
         if (playerMoveStatus != 0) {
             if (playerMoveStatus == 1)
             {
+                Debug.Log("left");
                 if (laneSwitchEndX != 1000f)
                 {
                     if (transform.position.x == laneSwitchEndX)
@@ -179,6 +199,7 @@ public class playerControl : MonoBehaviour
 
             else if (playerMoveStatus == 2)
             {
+                Debug.Log("right");
                 if (laneSwitchEndX != 1000f)
                 {
                     if (transform.position.x == laneSwitchEndX)
@@ -210,21 +231,40 @@ public class playerControl : MonoBehaviour
             }
 
             else if (playerMoveStatus == 3) {
+                //Debug.Log("jump");
                 float time = Time.time - playerJumpTime;
                 Vector3 pos = transform.position;
-                //float JumpSpeed = playerJumpSpeed/(main_camera.GetComponent<follow>().speed/5f);
                 float JumpSpeed = playerJumpSpeed;
                 float yPos = groundPositionY + time * JumpSpeed - (0.5f * gravityForce * Mathf.Pow(time, 2));
+                // Super Jump
+                if(superJump == true){
+                    //JumpSpeed = playerJumpSpeed*(1.5f);
+                    //yPos = groundPositionY + time * JumpSpeed*(2.0f) - (0.5f * gravityForce * Mathf.Pow(time, 2));
+                    timer -= Time.deltaTime;
+                    if(timer <= 0 && yPos < groundPositionY){
+                        superJump = false;
+                        changeColor("blue");
+                        timer = 4.0f;
+                    }
+                }
+
                 if (yPos < groundPositionY) {
                     playerMoveStatus = 0;
                     pos.y = groundPositionY;
                     transform.position = pos;
                 }
                 else {
-                    if(yPos<7.0f){
+                    //mario Jump
+                    if(yPos>1.0f && superJump == true){
+                        jumpShield = true;
+                    }else{
+                        jumpShield = false;
+                    }
+
+                    if(yPos<12.0f){
                         pos.y = yPos;
                     }else{
-                        pos.y = 7.0f;
+                        pos.y = 12.0f;
                     }
                     transform.position = pos;
                 }
@@ -290,7 +330,7 @@ public class playerControl : MonoBehaviour
         }
 
         if (shakeTF == true){
-        StartCoroutine(Shake(0.5f, 0.075f));
+        StartCoroutine(Shake(0.15f, 0.1f));
         shakeTF = false;
         }
     }
@@ -330,11 +370,12 @@ public class playerControl : MonoBehaviour
         }
         if(collider.gameObject.tag.Equals("p")){
             shakeTF = true;
-            if(isShield==false){
+            if(isShield==false && jumpShield==false){
                 failure.SetActive(true);
                 stop();
             }else{
                 isShield = false;
+                jumpShield = false;
                 shield.SetActive(false);
             }
             Destroy(collider.gameObject);
@@ -353,35 +394,61 @@ public class playerControl : MonoBehaviour
     {
       int l = collected.Length;
       if(l==0){
+          recipeBuild();
+          //
           frames[menu_1.Length-2].SetActive(false);
           frame00.SetActive(true);
           frames[menu_2.Length+3].SetActive(false);
           frame10.SetActive(true);
           frames[menu_3.Length+8].SetActive(false);
           frame20.SetActive(true);
+          //
+          foreach(GameObject image in images){
+              image.GetComponent<Image>().color = new Color(255,255,255,0.3f);
+          }
       }else{
           if(collected.Equals(menu_1.Substring(0, l))){
               frames[l].SetActive(true);
               frames[l-1].SetActive(false);
+              for(int i = 0; i < l; i++){
+                  images[i].GetComponent<Image>().color = new Color(255,255,255,1);
+              }
           }else{
               for(int i = 0; i < 5; i++){
                   frames[i].SetActive(false);
               }
+              for(int i = 0; i < 5; i++){
+                  images[i].GetComponent<Image>().color = new Color(255,255,255,0.3f);
+              }
           }
+
           if(collected.Equals(menu_2.Substring(0, l))){
-            frames[l+5].SetActive(true);
-            frames[l+4].SetActive(false);
+              frames[l+5].SetActive(true);
+              frames[l+4].SetActive(false);
+              for(int i = 5; i < l + 5; i++){
+                  images[i].GetComponent<Image>().color = new Color(255,255,255,1);
+              }
           }else{
               for(int i = 5; i < 10; i++){
                   frames[i].SetActive(false);
               }
+              for(int i = 5; i < 10; i++){
+                  images[i].GetComponent<Image>().color = new Color(255,255,255,0.3f);
+              }
           }
+
           if(collected.Equals(menu_3.Substring(0, l))){
-            frames[l+10].SetActive(true);
-            frames[l+9].SetActive(false);
+              frames[l+10].SetActive(true);
+              frames[l+9].SetActive(false);
+              for(int i = 10; i < l + 10; i++){
+                  images[i].GetComponent<Image>().color = new Color(255,255,255,1);
+              }
           }else{
               for(int i = 10; i < 15; i++){
                   frames[i].SetActive(false);
+              }
+              for(int i = 10; i < 15; i++){
+                  images[i].GetComponent<Image>().color = new Color(255,255,255,0.3f);
               }
           }
       } 
@@ -403,6 +470,8 @@ public class playerControl : MonoBehaviour
         //shakeTF = true;
         //slow the camera move speed
         //main_camera.GetComponent<follow>().speed -= 2f;
+        changeColor("red");
+        superJump = true;
         Debug.Log("Y");
     }
 
@@ -427,9 +496,9 @@ public class playerControl : MonoBehaviour
         if(collected.Equals(subRecipe1)){
             if(length == recipe1.Length - 1){
                 switch(recipe1[recipe1.Length-1]){
-                    case 'x': powerUp_x(); updateRecipe(); return "";
-                    case 'y': powerUp_y(); updateRecipe(); return "";
-                    case 'z': powerUp_z(); updateRecipe(); return "";
+                    case 'x': powerUp_x(); menu_1 = updateRecipe(); return "";
+                    case 'y': powerUp_y(); menu_1 = updateRecipe(); return "";
+                    case 'z': powerUp_z(); menu_1 = updateRecipe(); return "";
 
                 }
             }else if (length < recipe1.Length - 1){
@@ -438,9 +507,9 @@ public class playerControl : MonoBehaviour
         }else if(collected.Equals(subRecipe2)){
             if(length == recipe2.Length - 1){
                 switch(recipe2[recipe2.Length-1]){
-                    case 'x': powerUp_x(); updateRecipe(); return "";
-                    case 'y': powerUp_y(); updateRecipe(); return "";
-                    case 'z': powerUp_z(); updateRecipe(); return "";
+                    case 'x': powerUp_x(); menu_2 = updateRecipe(); return "";
+                    case 'y': powerUp_y(); menu_2 = updateRecipe(); return "";
+                    case 'z': powerUp_z(); menu_2 = updateRecipe(); return "";
 
                 }
             }else if (length < recipe2.Length - 1){
@@ -449,9 +518,9 @@ public class playerControl : MonoBehaviour
         }else if(collected.Equals(subRecipe3)){
             if(length == recipe3.Length - 1){
                 switch(recipe3[recipe3.Length-1]){
-                    case 'x': powerUp_x(); updateRecipe(); return "";
-                    case 'y': powerUp_y(); updateRecipe(); return "";
-                    case 'z': powerUp_z(); updateRecipe(); return "";
+                    case 'x': powerUp_x(); menu_3 = updateRecipe(); return "";
+                    case 'y': powerUp_y(); menu_3 = updateRecipe(); return "";
+                    case 'z': powerUp_z(); menu_3 = updateRecipe(); return "";
 
                 }
             }else if (length < recipe3.Length - 1){
@@ -471,9 +540,11 @@ public class playerControl : MonoBehaviour
         }
         return (newStr+str[str.Length - 2]).ToUpper();
     }
-    void updateRecipe()
+    string updateRecipe()
     {
         int index = Random.Range(0, 3);
+        string[] recipeBook = recipes[index];
+        return recipeBook[Random.Range(0, recipeBook.Length)];
 
     }
     public IEnumerator Shake(float duration, float magnitude)
@@ -489,6 +560,58 @@ public class playerControl : MonoBehaviour
             yield return 0;
         }
         main_camera.transform.position = orignalPosition;
+    }
+
+    public void recipeBuild()
+    {
+        //icon_1.sprite = Resources.Load<Sprite>("Sprites/boom");
+        //icon_1.sprite = Resources.Load("boom", typeof(Sprite)) as Sprite;
+        foreach(GameObject image in images){
+            image.SetActive(false);
+        }
+        for(int i = 0; i < menu_1.Length-1; i++){
+            images[i].SetActive(true);
+            images[i].GetComponent<Image>().sprite = iconTrans(menu_1[i]);
+            images[i].GetComponent<Image>().color = new Color(255,255,255,0.3f);
+        }
+        powerImage_1.GetComponent<Image>().sprite = iconTrans(menu_1[menu_1.Length-1]);
+        for(int i = 0; i < menu_2.Length-1; i++){
+            images[i+5].SetActive(true);
+            images[i+5].GetComponent<Image>().sprite = iconTrans(menu_2[i]);
+            images[i+5].GetComponent<Image>().color = new Color(255,255,255,0.3f);
+        }
+        powerImage_2.GetComponent<Image>().sprite = iconTrans(menu_2[menu_2.Length-1]);
+        for(int i = 0; i < menu_3.Length-1; i++){
+            images[i+10].SetActive(true);
+            images[i+10].GetComponent<Image>().sprite = iconTrans(menu_3[i]);
+            images[i+10].GetComponent<Image>().color = new Color(255,255,255,0.3f);
+        }
+        powerImage_3.GetComponent<Image>().sprite = iconTrans(menu_3[menu_3.Length-1]);
+        
+    }
+
+    Sprite iconTrans(char c)
+    {
+        switch(c){
+            case 'a': return sprite_a;
+            case 'b': return sprite_b;
+            case 'c': return sprite_c;
+            case 'x': return sprite_x;
+            case 'y': return sprite_y; 
+            case 'z': return sprite_z;
+        }
+        return null;
+    }
+
+    void changeColor(string c)
+    {
+        if(c == "red"){
+            Hat.GetComponent<Renderer>().sharedMaterial = Red;
+            Pants.GetComponent<Renderer>().sharedMaterial = Red;
+        }else if (c == "blue"){
+            Hat.GetComponent<Renderer>().sharedMaterial = BabyBlue;
+            Pants.GetComponent<Renderer>().sharedMaterial = BabyBlue;
+        }
     }
 
 }

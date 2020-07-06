@@ -47,7 +47,7 @@ public class ObstacleControl : MonoBehaviour
         }
 
         Vector3 position = GetPos(z, Zindex);
-        Debug.Log("position: " + position + "obsIndex: " + obsIndex);
+        //Debug.Log("position: " + position + "obsIndex: " + obsIndex);
 
         if (position.z != 0)
         {
