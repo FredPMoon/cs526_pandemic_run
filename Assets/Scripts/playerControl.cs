@@ -36,7 +36,7 @@ public class playerControl : MonoBehaviour
     string[] recipes01 = {"abcy", "bacy", "caby", "acby"};
     string[] recipes02 = {"bbcaz", "cbaaz", "aacbz", "bccaz"};
 
-	public SwipeBehavior swipeBehavior;
+	public SwipeBehaviour swipeBehaviour;
 	public bool keyPressed = false;
 	public float midLanePositionX;
 	public float leftLanePositionX;
@@ -84,7 +84,7 @@ public class playerControl : MonoBehaviour
         frames.Add(frame23);
         frames.Add(frame24);
 
-        // swipeBehavior = FindObjectOfType<SwipeBehavior>();
+        swipeBehaviour = FindObjectOfType<SwipeBehaviour>();
 		midLanePositionX = transform.position.x;
         leftLanePositionX = midLanePositionX - 1 * 140f * 0.02f;
         rightLanePositionX = midLanePositionX + 1 * 140f * 0.02f;
@@ -109,7 +109,7 @@ public class playerControl : MonoBehaviour
 		// if (Input.GetKey(KeyCode.DownArrow))
         //     transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || (swipeBehaviour.movement.x == 0 && swipeBehaviour.movement.y == 1))
 		{
             if (!keyPressed && !isMoving)
 			{
@@ -122,7 +122,7 @@ public class playerControl : MonoBehaviour
 			}
 		}
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || (swipeBehaviour.movement.x == -1 && swipeBehaviour.movement.y == 0))
         {
             if (!keyPressed && !isJumping)
             {
@@ -146,7 +146,7 @@ public class playerControl : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || (swipeBehaviour.movement.x == 1 && swipeBehaviour.movement.y == 0))
         {
             if (!keyPressed && !isJumping)
             {
