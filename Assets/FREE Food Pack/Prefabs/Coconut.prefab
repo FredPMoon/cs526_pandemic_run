@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t: {fileID: 4106476655478264100}
   cube: {fileID: 1000011038145264}
+  canvas: {fileID: 4850898624341055609}
 --- !u!1 &3826560692273871091
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5800235718608907068
 RectTransform:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class ingredient : MonoBehaviour
     private GameObject main_camera;
     public Text t;
     public GameObject cube;
+    public GameObject canvas;
     
     void Start()
     {
@@ -26,7 +27,10 @@ public class ingredient : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (main_camera.transform.position.z > transform.position.z-5){
+        if (main_camera.transform.position.z > transform.position.z-15){
+            canvas.SetActive(false);
+        }
+        if (main_camera.transform.position.z > transform.position.z-5){
              Destroy(this.gameObject);
 
         }

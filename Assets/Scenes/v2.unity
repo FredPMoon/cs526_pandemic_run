@@ -586,6 +586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b42f2f92b15c744bb99a6e7238433f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  timer: 2
 --- !u!114 &1309214814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,13 +605,7 @@ MonoBehaviour:
   road3: {fileID: 1802939986}
   road4: {fileID: 1904990706}
   distance: {fileID: 0}
-  infection_1: {fileID: 0}
-  infection_2: {fileID: 0}
-  infection_3: {fileID: 0}
-  roads: []
   road: {fileID: 2852916542392172467, guid: 125f6a72e1e47624ea051d09d8b54067, type: 3}
-  r1: {fileID: 5753484538296951237, guid: d19ef4223476f254eba6fe5463346206, type: 3}
-  r2: {fileID: 4028924486563328184, guid: 8e8915723a907094a93ad5d5ca6e63d4, type: 3}
 --- !u!81 &1309214815
 AudioListener:
   m_ObjectHideFlags: 0
