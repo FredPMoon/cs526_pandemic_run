@@ -5131,6 +5131,21 @@ MonoBehaviour:
   - {fileID: 1000011038145264, guid: 45c7dddf851acbb4e94a8fc0ead66eed, type: 3}
   - {fileID: 1000011262040222, guid: 196fe542ad163b149adf1ca04c19c753, type: 3}
   - {fileID: 1000011395917184, guid: 630adda25e718324a80512d3e4d69e13, type: 3}
+--- !u!114 &5971154437623237547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971154437623237541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df45d1d99b645d047af2fe39f28edbb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectSwipeOnlyAfterRelease: 0
+  SWIPE_THRESHOLD: 0
+  movement: {x: 0, y: 0}
 --- !u!1001 &6813145771212689434
 PrefabInstance:
   m_ObjectHideFlags: 0

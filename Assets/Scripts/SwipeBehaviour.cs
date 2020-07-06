@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwipeBehavior : MonoBehaviour
+public class SwipeBehaviour : MonoBehaviour
 {
     private Vector2 fingerDown;
     private Vector2 fingerUp;
@@ -12,7 +12,7 @@ public class SwipeBehavior : MonoBehaviour
 
     public Vector2 movement;
 
-    public SwipeBehavior()
+    public SwipeBehaviour()
     {
     }
 
