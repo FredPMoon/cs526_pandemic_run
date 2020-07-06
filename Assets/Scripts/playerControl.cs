@@ -111,9 +111,6 @@ public class playerControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow))
 		{
-
-            Debug.Log("is moving: " + isMoving);
-            Debug.Log("is jumping: " + isJumping);
             if (!keyPressed && !isMoving)
 			{
 				if (isPlayerOnGrond())
@@ -228,8 +225,8 @@ public class playerControl : MonoBehaviour
         float distCovered = (Time.time - laneSwitchStartTime) * playerSpeed;
         float fractionOfJourney = distCovered / Mathf.Abs(endX - startX);
         transform.position = Vector3.Lerp(new Vector3(startX, y, z), new Vector3(endX, y, z), fractionOfJourney);
-
-        if (float.Parse(transform.position.x.ToString("0.00")) == endX) {
+        float d = float.Parse(transform.position.x.ToString("0.00"));
+        if (fractionOfJourney >= 1.0f) {
             isMoving = false;
             laneSwitchEndX = undefinedX;
             laneSwitchStartX = undefinedX;
