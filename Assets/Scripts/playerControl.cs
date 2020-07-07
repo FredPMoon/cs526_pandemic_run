@@ -59,7 +59,13 @@ public class playerControl : MonoBehaviour
 
     void Start()
     {
-		menu_1 = recipes00[0];
+        ////start pause - revised by cyc
+        //Time.timeScale = 0;
+        /////////////////////////////////
+        ///
+        //System.Threading.Thread.Sleep(2000);
+
+        menu_1 = recipes00[0];
         menu_2 = recipes01[0];
         menu_3 = recipes02[0];
         recipe_1.text = format(menu_1);
@@ -102,6 +108,13 @@ public class playerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //end pause - revised by cyc
+        //if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        //{
+        //    Time.timeScale = 1;
+        //}
+        ///////////////////////////////
+
         Vector3 runPos = transform.position;
 		runPos.z = main_camera.transform.position.z + 10;
 		transform.position = runPos;
