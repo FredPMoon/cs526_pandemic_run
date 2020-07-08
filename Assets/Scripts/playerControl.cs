@@ -213,14 +213,13 @@ public class playerControl : MonoBehaviour
                 isJumping = false;
                 pos.y = groundPositionY;
                 transform.position = pos;
+                jumpShield = false;
             }
             else
             {
                 //mario Jump
                 if(yPos>1.5f && superJump == true){
                     jumpShield = true;
-                }else{
-                    jumpShield = false;
                 }
 
                 if(yPos<12.0f){
