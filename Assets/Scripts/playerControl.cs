@@ -48,9 +48,9 @@ public class playerControl : MonoBehaviour
 
     public GameObject powerImage_1, powerImage_2, powerImage_3;
 
-    public GameObject Hat, Pants, Coat;
+    public GameObject Hat, Pants;
 
-    public Material Red, BabyBlue, White, MarioBlue;
+    public Material Red, BabyBlue;
 
     string[] recipes00 = {"aacx", "bbax", "abbx", "abbx"};
     string[] recipes01 = {"abcy", "bacy", "caby", "acby"};
@@ -217,7 +217,7 @@ public class playerControl : MonoBehaviour
             else
             {
                 //mario Jump
-                if(yPos>1.5f && superJump == true){
+                if(yPos>1.0f && superJump == true){
                     jumpShield = true;
                 }else{
                     jumpShield = false;
@@ -395,7 +395,7 @@ public class playerControl : MonoBehaviour
         //shakeTF = true;
         //slow the camera move speed
         //main_camera.GetComponent<follow>().speed -= 2f;
-        changeColor("mario");
+        changeColor("red");
         superJump = true;
         Debug.Log("Y");
     }
@@ -536,11 +536,6 @@ public class playerControl : MonoBehaviour
         }else if (c == "blue"){
             Hat.GetComponent<Renderer>().sharedMaterial = BabyBlue;
             Pants.GetComponent<Renderer>().sharedMaterial = BabyBlue;
-            Coat.GetComponent<Renderer>().sharedMaterial = White;
-        }else if (c == "mario"){
-            Hat.GetComponent<Renderer>().sharedMaterial = Red;
-            Coat.GetComponent<Renderer>().sharedMaterial = Red;
-            Pants.GetComponent<Renderer>().sharedMaterial = MarioBlue;
         }
     }
 
