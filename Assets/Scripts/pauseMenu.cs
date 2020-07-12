@@ -38,4 +38,12 @@ public class pauseMenu : MonoBehaviour
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
     }
+
+    public void CreditMenuOpened() {
+        pauseMenuUI.SetActive(false);
+    }
+
+    public void CreditMenuClosed() {
+        pauseMenuUI.SetActive(true);
+    }
 }
