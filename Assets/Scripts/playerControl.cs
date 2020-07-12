@@ -7,6 +7,7 @@ public class playerControl : MonoBehaviour
 {
     //tag - 1/2/3 对应跑道位置
     //tag - positive 在player触碰后游戏结束
+    //public ParticleSystem effect_1;
     public float moveSpeed = 10f;
     public GameObject failure;
     public GameObject main_camera;
@@ -56,7 +57,7 @@ public class playerControl : MonoBehaviour
     string[] recipes01 = {"abcy", "bacy", "caby", "acby"};
     string[] recipes02 = {"bbcaz", "cbaaz", "aacbz", "bccaz"};
 
-	public SwipeBehaviour swipeBehaviour;
+	SwipeBehaviour swipeBehaviour;
 	public bool keyPressed = false;
 	public float midLanePositionX;
 	public float leftLanePositionX;
@@ -76,10 +77,24 @@ public class playerControl : MonoBehaviour
     float playerJumpTime;
     float simulatedY;
     readonly float undefinedX = 1000.0f;
+    public AudioSource source;
+    public AudioClip jumpSound;
+    public AudioClip coinSound;
+    public AudioClip powerUp_x_sound;
+    public AudioClip powerUp_y_sound;
+    public AudioClip powerUp_z_sound;
+    public AudioClip destorySound;
+    public AudioClip failSound;
 
     void Start()
     {
-		menu_1 = recipes00[0];
+		// GameObject fireWork = (GameObject)Instantiate(Resources.Load("Assets/JMO Assets/Cartoon FX/CFX Prefabs/Explosions/CFX_Firework_Trails_Gravity.prefab"), this.transform.position, Quaternion.identity);
+        // ParticleSystem ps = fireWork.GetComponent<ParticleSystem>();
+        // ps.Play();
+        // effect_1.Play();
+        // effect_1.Pause();
+
+        menu_1 = recipes00[0];
         menu_2 = recipes01[0];
         menu_3 = recipes02[0];
         recipes.Add(recipes00);
@@ -131,6 +146,7 @@ public class playerControl : MonoBehaviour
 			{
 				if (isPlayerOnGrond())
 				{
+                    source.PlayOneShot(jumpSound, 1);
                     playerJumpTime = Time.time;
                     isJumping = true;
                 }
@@ -283,6 +299,7 @@ public class playerControl : MonoBehaviour
             package = package + tag;
             package = compare(package, menu_1, menu_2, menu_3);
             collection.text = package;
+            source.PlayOneShot(coinSound, 1);
             Destroy(collider.gameObject);
             recipeCheck(package);
         }
@@ -294,9 +311,11 @@ public class playerControl : MonoBehaviour
         if(collider.gameObject.tag.Equals("p")){
             shakeTF = true;
             if(isShield==false && jumpShield==false){
+                source.PlayOneShot(failSound, 1);
                 failure.SetActive(true);
                 stop();
             }else{
+                source.PlayOneShot(destorySound, 1);
                 isShield = false;
                 jumpShield = false;
                 shield.SetActive(false);
@@ -384,6 +403,9 @@ public class playerControl : MonoBehaviour
         //实现屏幕震动
         //shakeTF = true;
         //添加保护层
+        // GameObject effect_1 = (GameObject)Instantiate(Resources.Load("Assets/JMO Assets/Cartoon FX/CFX Prefabs/Explosions/CFX_Firework_Trails_Gravity.prefab"));
+        // effect_1.transform.position = this.transform.position;
+        source.PlayOneShot(powerUp_x_sound, 1);
         isShield = true;
         shield.SetActive(true);
         Debug.Log("X");
@@ -394,6 +416,9 @@ public class playerControl : MonoBehaviour
         //shakeTF = true;
         //slow the camera move speed
         //main_camera.GetComponent<follow>().speed -= 2f;
+        // GameObject effect_1 = (GameObject)Instantiate(Resources.Load("Assets/JMO Assets/Cartoon FX/CFX Prefabs/Explosions/CFX_Firework_Trails_Gravity.prefab"));
+        // effect_1.transform.position = this.transform.position;
+        source.PlayOneShot(powerUp_y_sound, 1);
         changeColor("mario");
         superJump = true;
         Debug.Log("Y");
@@ -402,6 +427,9 @@ public class playerControl : MonoBehaviour
     void powerUp_z()
     {
         //clear the infected, positive patients
+        // GameObject effect_1 = (GameObject)Instantiate(Resources.Load("Assets/JMO Assets/Cartoon FX/CFX Prefabs/Explosions/CFX_Firework_Trails_Gravity.prefab"));
+        // effect_1.transform.position = this.transform.position;
+        source.PlayOneShot(powerUp_z_sound, 1);
         GameObject[] patients = GameObject.FindGameObjectsWithTag("p");
         foreach(GameObject patient in patients){
             Destroy(patient);

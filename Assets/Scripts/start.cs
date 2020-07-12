@@ -21,6 +21,9 @@ public class start : MonoBehaviour
     public GameObject redLight, yellowLight, greenLight;
 
     public static bool is_first = true;
+    public AudioSource AS;
+    public AudioClip clip;
+    public AudioClip startSound;
 
     void Start()
     {
@@ -40,7 +43,7 @@ public class start : MonoBehaviour
         {
             //set the traffic to green
             greenLight.SetActive(false);
-            
+
             Time.timeScale = 0;
             StartCoroutine(disable());
             //is_first = false;
@@ -59,22 +62,26 @@ public class start : MonoBehaviour
         yield return new WaitForSecondsRealtime(timer);
 
         //levelText.text = "";
-        levelText1.text = "1. Avoid Virus.";
+        AS.PlayOneShot(clip, 1);
+        levelText1.text = "Avoid Virus";
         yield return new WaitForSecondsRealtime(timer);
 
+        AS.PlayOneShot(clip, 1);
         levelText1.text = "";
-        levelText2.text = "2. Collect gradients.";
+        levelText2.text = "Collect gradients";
         redLight.SetActive(true);
 
         yield return new WaitForSecondsRealtime(timer);
 
+        AS.PlayOneShot(clip, 1);
         levelText2.text = "";
-        levelText3.text = "3. Complete recipe.";
+        levelText3.text = "Complete recipe";
         redLight.SetActive(false);
         yellowLight.SetActive(true);
 
         yield return new WaitForSecondsRealtime(timer);
 
+        AS.PlayOneShot(clip, 1);
         levelText3.text = "";
         levelText4.text = "Let's Go!!!";
         yellowLight.SetActive(false);
@@ -82,6 +89,7 @@ public class start : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(timer);
 
+        AS.PlayOneShot(startSound, 1);
         levelText4.text = "";
         Time.timeScale = 1;
         is_first = false;
