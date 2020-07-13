@@ -81,7 +81,7 @@ public class start : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(timer);
 
-        AS.PlayOneShot(clip, 1);
+        AS.PlayOneShot(startSound, 1);
         levelText3.text = "";
         levelText4.text = "Let's Go!!!";
         yellowLight.SetActive(false);
@@ -89,7 +89,6 @@ public class start : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(timer);
 
-        AS.PlayOneShot(startSound, 1);
         levelText4.text = "";
         Time.timeScale = 1;
         is_first = false;
