@@ -28,7 +28,7 @@ public class pauseMenu : MonoBehaviour
         }
     }
 
-    void ActiveMenu() {
+    public void ActiveMenu() {
         Time.timeScale = 0;
         pauseMenuUI.SetActive(true);
     }
@@ -37,5 +37,13 @@ public class pauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenuUI.SetActive(false);
+    }
+
+    public void CreditMenuOpened() {
+        pauseMenuUI.SetActive(false);
+    }
+
+    public void CreditMenuClosed() {
+        pauseMenuUI.SetActive(true);
     }
 }
