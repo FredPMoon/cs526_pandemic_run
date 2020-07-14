@@ -24,6 +24,7 @@ public class start : MonoBehaviour
     public AudioSource AS;
     public AudioClip clip;
     public AudioClip startSound;
+    public GameObject dead;
 
     void Start()
     {
@@ -59,6 +60,8 @@ public class start : MonoBehaviour
 
     public IEnumerator disable()
     {
+        dead.GetComponent<ParticleSystem>().Pause();
+        dead.SetActive(false);
         yield return new WaitForSecondsRealtime(timer);
 
         //levelText.text = "";
