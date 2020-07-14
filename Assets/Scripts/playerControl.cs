@@ -313,7 +313,7 @@ public class playerControl : MonoBehaviour
             shakeTF = true;
             if(isShield==false && jumpShield==false){
                 source.PlayOneShot(failSound, 1);
-                dead.transform.position = this.transform.position;
+                dead.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z-0.5f);
                 dead.SetActive(true);
                 dead.GetComponent<ParticleSystem>().Play();
                 failure.SetActive(true);
