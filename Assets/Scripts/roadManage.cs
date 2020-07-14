@@ -132,6 +132,7 @@ public class roadManage : MonoBehaviour
     {
         roadCount++;
         distance.text = "Distance: " + roadCount;
+        PlayerPrefs.SetInt("distance", roadCount - 3);
         //int type = Random.Range(0, roads.Count);
         
         //GameObject newRoad = Instantiate(roads[type], new Vector3(3, 0, (roadCount*10)+2), Quaternion.identity) as GameObject;

@@ -86,6 +86,7 @@ public class playerControl : MonoBehaviour
     public AudioClip destroySound;
     public AudioClip failSound;
     public GameObject dead;
+    private int realScore;
 
     void Start()
     {
@@ -305,6 +306,7 @@ public class playerControl : MonoBehaviour
             source.PlayOneShot(coinSound, 1);
             Destroy(collider.gameObject);
             recipeCheck(package);
+            realScore+=5;
         }
         if(collider.gameObject.tag.Equals("positive")){
             failure.SetActive(true);
@@ -318,6 +320,8 @@ public class playerControl : MonoBehaviour
                 dead.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z-0.5f);
                 dead.SetActive(true);
                 dead.GetComponent<ParticleSystem>().Play();
+                realScore = PlayerPrefs.GetInt("distance")*10 + realScore;
+                score.text = ""+realScore;
                 failure.SetActive(true);
                 stop();
             }else{
@@ -325,6 +329,7 @@ public class playerControl : MonoBehaviour
                 isShield = false;
                 jumpShield = false;
                 shield.SetActive(false);
+                realScore+=15;
             }
             Destroy(collider.gameObject);
         }
@@ -415,6 +420,7 @@ public class playerControl : MonoBehaviour
         isShield = true;
         shield.SetActive(true);
         Debug.Log("X");
+        realScore+=100;
     }
 
     void powerUp_y()
@@ -428,6 +434,7 @@ public class playerControl : MonoBehaviour
         changeColor("mario");
         superJump = true;
         Debug.Log("Y");
+        realScore+=100;
     }
 
     void powerUp_z()
@@ -441,6 +448,7 @@ public class playerControl : MonoBehaviour
             Destroy(patient);
         }
         Debug.Log("Z");
+        realScore+=200;
     }
 
     //与所有配方一一比对
