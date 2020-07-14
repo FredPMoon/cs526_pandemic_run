@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject egg;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +20,10 @@ public class UIManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+    }
+
+    public void easterEgg()
+    {
+        egg.SetActive(!(egg.activeInHierarchy));
     }
 }

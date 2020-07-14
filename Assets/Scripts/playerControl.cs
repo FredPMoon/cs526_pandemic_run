@@ -83,7 +83,7 @@ public class playerControl : MonoBehaviour
     public AudioClip powerUp_x_sound;
     public AudioClip powerUp_y_sound;
     public AudioClip powerUp_z_sound;
-    public AudioClip destorySound;
+    public AudioClip destroySound;
     public AudioClip failSound;
     public GameObject dead;
 
@@ -321,7 +321,7 @@ public class playerControl : MonoBehaviour
                 failure.SetActive(true);
                 stop();
             }else{
-                source.PlayOneShot(destorySound, 1);
+                source.PlayOneShot(destroySound, 1);
                 isShield = false;
                 jumpShield = false;
                 shield.SetActive(false);
