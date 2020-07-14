@@ -71,14 +71,14 @@ public class start : MonoBehaviour
 
         AS.PlayOneShot(clip, 1);
         levelText1.text = "";
-        levelText2.text = "Collect gradients";
+        levelText2.text = "Collect Ingredients";
         redLight.SetActive(true);
 
         yield return new WaitForSecondsRealtime(timer);
 
         AS.PlayOneShot(clip, 1);
         levelText2.text = "";
-        levelText3.text = "Complete recipe";
+        levelText3.text = "Complete Recipes";
         redLight.SetActive(false);
         yellowLight.SetActive(true);
 
