@@ -94,6 +94,8 @@ public class playerControl : MonoBehaviour
         // ps.Play();
         // effect_1.Play();
         // effect_1.Pause();
+        dead.GetComponent<ParticleSystem>().Pause();
+        dead.SetActive(false);
 
         menu_1 = recipes00[0];
         menu_2 = recipes01[0];
