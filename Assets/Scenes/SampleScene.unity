@@ -1194,7 +1194,7 @@ GameObject:
   - component: {fileID: 267712959}
   m_Layer: 5
   m_Name: professor
-  m_TagString: Untagged
+  m_TagString: egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

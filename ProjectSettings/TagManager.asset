@@ -19,6 +19,7 @@ TagManager:
   - d
   - e
   - p
+  - egg
   layers:
   - Default
   - TransparentFX

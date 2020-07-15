@@ -30,5 +30,6 @@ public class creditMenu : MonoBehaviour
     public void DeactiveMenu() {
         isOpened = false;
         creditMenuUI.SetActive(false);
+        GameObject.FindGameObjectWithTag("egg").SetActive(false);
     }
 }
